@@ -1,0 +1,428 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Sri Sai Developers</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap">
+<style>
+/* Layout: sticky brand bar with scrolling section nav, dark-green hero, project cards with a to-scale Amaravati–Vijayawada map, region and process bands, one enquiry form beside the contact card. Tapping a card opens a full project page. */
+:root{
+  --bg:#EAF1EC; --surface:#FFFEFA; --fg:#14281F; --muted:#56655D; --line:#CFDAD2;
+  --deep:#0F3D33; --deep2:#0A2E26; --deepfg:#F4F1E6; --sand:#EFD9A7; --accent:#14795C; --accentfg:#FFFFFF;
+  --gold:#8F6A27; --goldbright:#D9B45A; --note:#F6EEDC; --plot:#BCD3C6; --road:#EAF1EC; --ring:#A9BDB1;
+  --display:"Playfair Display",Georgia,serif; --body:"Libre Franklin","Segoe UI",system-ui,sans-serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0B1B17; --surface:#12302A; --fg:#E8F0EA; --muted:#9DB3A8; --line:#24433B;
+  --sand:#1A2B22; --accent:#2BA67F; --accentfg:#06201A; --gold:#D9B45A; --goldbright:#E3C16F; --note:#1D3A31;
+  --plot:#2B5448; --road:#0B1B17; --ring:#2F5248; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0B1B17; --surface:#12302A; --fg:#E8F0EA; --muted:#9DB3A8; --line:#24433B;
+  --sand:#1A2B22; --accent:#2BA67F; --accentfg:#06201A; --gold:#D9B45A; --goldbright:#E3C16F; --note:#1D3A31;
+  --plot:#2B5448; --road:#0B1B17; --ring:#2F5248; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--body);font-size:15px;line-height:1.55}
+h1,h2,h3{font-family:var(--display);line-height:1.18;margin:0;text-wrap:balance}
+p{margin:0}
+a{color:inherit}
+button,input,select,textarea{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--goldbright);outline-offset:2px}
+.w{max-width:1080px;margin-inline:auto;padding-inline:16px}
+.eyebrow{font-size:12px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--gold)}
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:10;background:var(--deep);color:var(--deepfg);border-bottom:1px solid rgba(255,255,255,.12)}
+.top .w{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-block:10px}
+.brand{text-decoration:none;display:grid;line-height:1.15;min-width:0}
+.brand b{font-family:var(--display);letter-spacing:.14em;font-size:15px;text-transform:uppercase;white-space:nowrap}
+.brand small{color:var(--goldbright);letter-spacing:.2em;font-size:10.5px;font-weight:700;text-transform:uppercase;white-space:nowrap}
+.actions{display:flex;gap:8px}
+.btn{border:1px solid var(--line);background:var(--surface);color:var(--fg);border-radius:999px;padding:9px 16px;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;font-weight:600;font-size:14px;white-space:nowrap}
+.btn.solid{background:var(--accent);color:var(--accentfg);border-color:var(--accent)}
+.btn.ghost{background:transparent;color:inherit;border-color:currentColor}
+.top .btn{padding:7px 14px;font-size:13px}
+.nav{border-top:1px solid rgba(255,255,255,.1);overflow-x:auto;scrollbar-width:none}
+.nav::-webkit-scrollbar{display:none}
+.nav .w{display:flex;gap:4px;padding-block:2px}
+.nav button{background:none;border:0;color:var(--deepfg);cursor:pointer;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:10px;white-space:nowrap;opacity:.9}
+.nav button:hover{color:var(--goldbright)}
+.hero{background:var(--deep);color:var(--deepfg);position:relative;overflow:hidden}
+.hero svg.rings{position:absolute;right:-120px;top:-60px;width:640px;max-width:none;opacity:.5;pointer-events:none}
+.hero .w{position:relative;padding-block:56px 60px;display:grid;gap:16px}
+.hero .eyebrow{color:var(--goldbright)}
+.hero h1{font-size:clamp(32px,6vw,54px)}
+.hero h2{font-size:clamp(20px,3.2vw,28px);font-family:var(--body);font-weight:600}
+.hero p.lead{max-width:56ch;opacity:.92}
+.hero .cta{display:flex;flex-wrap:wrap;gap:10px;margin-top:6px}
+.hero .btn.solid{text-transform:uppercase;letter-spacing:.04em}
+.trust{background:var(--deep2);color:var(--deepfg);text-align:center;font-weight:700;letter-spacing:.04em;font-size:14px}
+.trust .w{display:flex;flex-wrap:wrap;justify-content:center;gap:4px 22px;padding-block:14px}
+.sec{padding-block:44px}
+.sec.sand{background:var(--sand)}
+.sec.deep{background:var(--deep);color:var(--deepfg)}
+.sec.deep .eyebrow{color:var(--goldbright)}
+.head{display:grid;gap:6px;margin-bottom:22px}
+.head h2{font-size:clamp(24px,4vw,34px)}
+.head p{color:var(--muted);max-width:62ch}
+.sec.deep .head p{color:var(--deepfg);opacity:.85}
+.tools{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:16px}
+.chip{border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:7px 15px;cursor:pointer;font-size:13px;font-weight:600}
+.chip[aria-pressed="true"]{background:var(--deep);color:var(--deepfg);border-color:var(--deep)}
+.tools select{margin-left:auto;border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:7px 12px;font-size:13px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,300px),1fr));gap:18px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;overflow:hidden;display:flex;flex-direction:column;min-width:0}
+.card .art{height:150px;background:var(--plot);cursor:pointer}
+.card .art svg{display:block;width:100%;height:100%}
+.cb{padding:16px;display:grid;gap:10px;flex:1;align-content:start}
+.cb .eyebrow{font-size:11px;letter-spacing:.16em}
+.cb h3{font-size:22px}
+.loc{color:var(--muted);font-size:14px}
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:10px;border-block:1px solid var(--line);padding-block:10px}
+.pair span{display:block;color:var(--muted);font-size:12.5px}
+.pair b{font-variant-numeric:tabular-nums;font-size:14.5px}
+.approved{background:var(--note);color:var(--gold);font-weight:700;font-size:13px;border-radius:8px;padding:8px 12px}
+.tag{font-weight:600;font-size:13.5px}
+.cb .row{display:flex;flex-wrap:wrap;gap:8px;margin-top:2px}
+.cols{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:20px;align-items:start}
+@media(max-width:820px){.cols{grid-template-columns:minmax(0,1fr)}}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:18px}
+.panel h3{font-size:19px;margin-bottom:4px}
+.panel .loc{margin-bottom:10px}
+svg.map{width:100%;height:auto;display:block}
+svg.map text{fill:var(--muted);font-family:var(--body);font-size:11px}
+svg.map .lm text{fill:var(--fg)}
+.pin{cursor:pointer}
+.pin circle{fill:var(--goldbright);stroke:var(--deep);stroke-width:2}
+.pin text{fill:var(--fg);font-weight:700;font-size:12px}
+.pin.sel circle{fill:var(--accent);stroke:var(--goldbright);stroke-width:3}
+.keys{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:12px;color:var(--muted);margin-top:8px}
+.keys i{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:5px;vertical-align:-1px}
+.two{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:18px}
+.loccard{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:22px;display:grid;gap:10px;align-content:start}
+.loccard h3{font-size:22px}
+.loccard p{color:var(--muted)}
+.loccard .btn{justify-self:start}
+.why{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.4fr);gap:28px;align-items:start}
+@media(max-width:820px){.why{grid-template-columns:minmax(0,1fr)}}
+.why .pts{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr));gap:18px 28px}
+.why h3{font-size:18px;color:var(--goldbright);margin-bottom:4px}
+.why p{opacity:.9;font-size:14.5px}
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,210px),1fr));gap:22px;list-style:none;padding:0;margin:0}
+.steps li{display:grid;gap:8px;align-content:start}
+.steps .n{width:44px;height:44px;border-radius:50%;background:var(--deep);color:var(--deepfg);display:grid;place-items:center;font-weight:700;font-variant-numeric:tabular-nums}
+.steps h3{font-size:19px}
+.steps p{color:var(--muted);font-size:14.5px}
+.disc{background:var(--note);border:1px solid var(--line);border-radius:10px;padding:12px 16px;text-align:center;font-size:14px;color:var(--gold);margin-top:26px}
+.contact{background:var(--deep);color:var(--deepfg);border-radius:14px;padding:24px;display:grid;gap:14px;align-content:start}
+.contact h3{font-size:24px}
+.contact .eyebrow{color:var(--goldbright)}
+.contact dl{margin:0;display:grid;gap:12px}
+.contact dt{font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--goldbright);font-weight:700}
+.contact dd{margin:0;overflow-wrap:anywhere}
+.num{font-weight:700;font-size:18px;font-variant-numeric:tabular-nums;user-select:all}
+.contact .row{display:flex;flex-wrap:wrap;gap:8px}
+.contact .btn.ghost{color:var(--deepfg)}
+form.enq{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+@media(max-width:560px){form.enq{grid-template-columns:minmax(0,1fr)}}
+form.enq .full{grid-column:1/-1}
+form.enq label{display:grid;gap:5px;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+form.enq input,form.enq select,form.enq textarea{border:1px solid var(--line);background:var(--bg);border-radius:10px;padding:11px 12px;width:100%;font-size:15px;letter-spacing:0;text-transform:none;font-weight:400}
+form.enq .btn{justify-self:start;text-transform:uppercase;letter-spacing:.04em}
+.fine{font-size:12.5px;color:var(--muted)}
+.foot{background:var(--deep2);color:var(--deepfg);padding-block:30px}
+.foot .w{display:grid;gap:10px}
+.foot p{opacity:.85;font-size:13.5px}
+.foot a{color:var(--goldbright)}
+.back{margin-block:20px 14px}
+.dhead{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:22px;align-items:start}
+@media(max-width:820px){.dhead{grid-template-columns:minmax(0,1fr)}}
+.dart{border-radius:14px;overflow:hidden;border:1px solid var(--line);background:var(--plot)}
+.dart svg{display:block;width:100%;height:auto}
+.dtitle{display:grid;gap:10px;align-content:start}
+.dtitle h1{font-size:clamp(28px,5vw,42px)}
+.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-block:20px}
+.fact{border-top:2px solid var(--goldbright);padding-top:8px}
+.fact span{display:block;font-size:11.5px;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;font-weight:700}
+.fact b{font-family:var(--display);font-size:18px;font-variant-numeric:tabular-nums}
+.d{margin-top:30px}
+.d h2{font-size:24px;margin-bottom:12px}
+.ul{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:10px 22px}
+.ul li{padding-left:18px;position:relative}
+.ul li::before{content:"";position:absolute;left:0;top:.7em;width:8px;height:2px;background:var(--goldbright)}
+.near{display:grid;gap:12px}
+.nrow{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 12px}
+.nrow small{color:var(--muted);display:block;font-size:12px}
+.nrow .km{font-weight:700;font-variant-numeric:tabular-nums;text-align:right}
+.bar{grid-column:1/-1;height:6px;border-radius:3px;background:var(--line);overflow:hidden}
+.bar i{display:block;height:100%;background:var(--accent)}
+.calc{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:14px;align-items:end}
+.calc label{display:grid;gap:5px;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.calc input{border:1px solid var(--line);background:var(--bg);border-radius:10px;padding:11px 12px;font-size:16px;width:100%}
+.calc output{font-family:var(--display);font-size:26px;font-variant-numeric:tabular-nums}
+.srcs{font-size:12.5px;color:var(--muted);margin-top:14px}
+.srcs a{color:var(--accent)}
+.toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(16px + env(safe-area-inset-bottom,0px));background:var(--deep);color:var(--deepfg);padding:10px 16px;border-radius:10px;font-size:14px;z-index:30;max-width:calc(100% - 32px);box-shadow:0 6px 24px rgba(0,0,0,.3)}
+.fab{position:fixed;right:14px;bottom:calc(14px + env(safe-area-inset-bottom,0px));z-index:20}
+.fab .btn{box-shadow:0 6px 20px rgba(0,0,0,.3)}
+</style>
+
+<header class="top">
+  <div class="w">
+    <a class="brand" href="#home"><b>Sri Sai Developers</b><small>Premium Open Plots</small></a>
+    <div class="actions">
+      <a class="btn ghost" id="callTop" href="#">Call Now</a>
+      <a class="btn solid" id="waTop" href="#" target="_blank" rel="noopener">WhatsApp</a>
+    </div>
+  </div>
+  <nav class="nav" aria-label="Sections"><div class="w" id="nav"></div></nav>
+</header>
+<main id="app"></main>
+<div class="fab"><a class="btn solid" id="waFab" href="#" target="_blank" rel="noopener">Chat on WhatsApp</a></div>
+
+<script>
+/* ---------- Business details (from the Sri Sai Developers website) ---------- */
+var CO = {
+  name:"Sri Sai Developers", tag:"Premium Open Plots",
+  phone:"8309094588", wa:"918309094588", email:"srisaidevelopers.73@gmail.com",
+  address:"YSR RING, Paipula Rd, Opp. Navarang Chai, Andhra Prabha Colony, PNT Colony, Vijayawada, Andhra Pradesh 520015",
+  hours:"24/7"
+};
+
+/* Reference places for the map and distance bars. Coordinates are approximate. */
+var CENTER = {name:"Vijayawada", lat:16.5062, lng:80.6480};
+var LANDMARKS = {
+  vja:{name:"Vijayawada", lat:16.5062, lng:80.6480},
+  amr:{name:"Amaravati capital area", lat:16.5100, lng:80.5150},
+  gnt:{name:"Guntur", lat:16.3067, lng:80.4365},
+  mgl:{name:"Mangalagiri", lat:16.4307, lng:80.5525},
+  gnv:{name:"Vijayawada Airport (Gannavaram)", lat:16.5304, lng:80.7968},
+  mtm:{name:"Machilipatnam", lat:16.1750, lng:81.1380}
+};
+
+/* ---------- Projects (names, prices, sizes and approvals as listed on the site) ---------- */
+var PROJECTS = [
+  { id:"iconic-3-kaza", name:"ICONIC-3", area:"Kaza", place:"Kaza / Amaravati Region", region:"Amaravati",
+    district:"Mangalagiri mandal, Guntur district", lat:16.3906, lng:80.5425, mapped:true,
+    plot:"183+ Sq. Yds", min:183, rate:26500, approval:"APCRDA & RERA Approved", seed:3,
+    summary:"Open plots in Kaza, in the Amaravati region, on the NH 16 corridor between Vijayawada and Guntur.",
+    highlights:["NH 16 passes through Kaza","Acharya Nagarjuna University is nearby","Nagarjuna Nagar Halt and Nambur railway stations are the nearest rail points","In the Mangalagiri mandal, close to the Amaravati capital area"],
+    near:["vja","amr","mgl","gnt","gnv"] },
+  { id:"iconic-2-bhogapuram", name:"ICONIC-2", area:"Bhogapuram", place:"Bhogapuram / Vizag Region", region:"Vizag",
+    district:"Vizianagaram district", mapped:false,
+    plot:"150+ Sq. Yds", min:150, rate:15000, approval:"APCRDA & RERA Approved", seed:7,
+    summary:"Open plots at Bhogapuram in the Vizag region, next to the new Alluri Sitarama Raju International Airport.",
+    highlights:["Alluri Sitarama Raju International Airport at Bhogapuram started commercial flights on 17 August 2026","About 45 km from Visakhapatnam","The airport is off National Highway 16","Phase one handles about 6 million passengers a year, planned to grow to 18 million"],
+    facts:[["Visakhapatnam","about 45 km"],["Airport","Bhogapuram, off NH 16"]] },
+  { id:"iconic-2-neppalli", name:"Iconic-2", area:"Neppalli", place:"Neppalli", region:"Vijayawada",
+    tagline:"Amaravati ORR Interjunction at Bunder Highway",
+    district:"Krishna district", lat:16.3956, lng:80.8184, mapped:true,
+    plot:"150+ Sq. Yds", min:150, rate:15499, approval:"APCRDA & RERA Approved", seed:11,
+    summary:"Open plots at Neppalli, at the Amaravati ORR interjunction on the Bunder Highway.",
+    highlights:["Located at the Amaravati ORR interjunction at Bunder Highway","Vijayawada Airport (Gannavaram) is the nearest airport","Tarigoppula is the nearest railway station","The Amaravati Outer Ring Road is a planned 190 km, six-lane corridor around the capital region"],
+    near:["vja","gnv","amr","mtm"] },
+  { id:"golden-heights-pamarru", name:"Golden Heights", area:"Pamarru", place:"Pamarru", region:"Vijayawada",
+    tagline:"Bunder Port & Near Bunder Highway",
+    district:"Pamarru mandal, Krishna district", lat:16.3270, lng:80.9610, mapped:true,
+    plot:"150+ Sq. Yds", min:150, rate:14499, approval:"APCRDA & RERA Approved", seed:15,
+    summary:"Open plots at Pamarru, close to the Bunder Highway and the Machilipatnam (Bunder) port area.",
+    highlights:["Near the Bunder Highway and Bunder Port","National Highways 65 and 165 serve Pamarru","Machilipatnam, home of the Bandar port, is a deep-water port development area","Lowest entry price among our projects"],
+    near:["vja","mtm","gnv","amr"] }
+];
+
+var FOCUS = {
+  Amaravati:"A major developing region in Andhra Pradesh with growing relevance for residential and property development.",
+  Vijayawada:"A major commercial and connectivity hub in Andhra Pradesh offering diverse property opportunities."
+};
+var WHY = [
+  ["Long-Term Asset","Land can serve as a long-term property asset depending on location, documentation and market conditions."],
+  ["Flexibility","A plot may provide flexibility for future residential development, subject to applicable rules."],
+  ["Location Matters","Connectivity, surrounding development and local infrastructure can influence property demand."],
+  ["Verify Before You Buy","Buyers should independently verify ownership, approvals, title, documents and applicable legal requirements."]
+];
+var STEPS = [
+  ["Share Your Requirement","Tell us your preferred location, budget and plot requirement."],
+  ["Explore Suitable Options","Review available projects and plot details."],
+  ["Schedule a Site Visit","Visit the project and understand the location and surroundings."],
+  ["Documentation & Purchase","Review relevant documents and complete the purchase process after satisfactory verification."]
+];
+var SOURCES = [
+  ["Kaza (Wikipedia)","https://en.wikipedia.org/wiki/Kaza,_Guntur_district"],
+  ["Pamarru (Wikipedia)","https://en.wikipedia.org/wiki/Pamarru,_Krishna_district"],
+  ["Machilipatnam (Wikipedia)","https://en.wikipedia.org/wiki/Machilipatnam"],
+  ["Alluri Sitarama Raju International Airport (Wikipedia)","https://en.wikipedia.org/wiki/Alluri_Sitarama_Raju_International_Airport"],
+  ["Amaravati Outer Ring Road (The Metro Rail Guy)","https://themetrorailguy.com/amaravati-outer-ring-road-information-route-map-status/"]
+];
+
+/* ---------- helpers ---------- */
+var app=document.getElementById("app");
+var state={region:"All",sort:"default"};
+function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
+function inr(n){return "₹"+Math.round(n).toLocaleString("en-IN")}
+function km(a,b,c,d){var R=6371,r=Math.PI/180,x=Math.sin((c-a)*r/2),y=Math.sin((d-b)*r/2);
+  return 2*R*Math.asin(Math.sqrt(x*x+Math.cos(a*r)*Math.cos(c*r)*y*y))}
+function wa(t){return "https://wa.me/"+CO.wa+"?text="+encodeURIComponent(t)}
+function toast(m){var t=document.createElement("div");t.className="toast";t.textContent=m;document.body.appendChild(t);setTimeout(function(){t.remove()},2800)}
+function copyText(t){try{navigator.clipboard.writeText(t).then(function(){toast("Number copied")},function(){toast("Select the number to copy it")})}catch(e){toast("Select the number to copy it")}}
+function byId(id){return PROJECTS.filter(function(p){return p.id===id})[0]}
+
+/* plot-layout sketch, one per project (illustrative) */
+function art(p,w,h){
+  var s=p.seed*9301%233280,rnd=function(){s=(s*9301+49297)%233280;return s/233280};
+  var cols=8,rows=5,g=5,cw=(w-g*(cols+1))/cols,ch=(h-g*(rows+1))/rows,o='<rect width="'+w+'" height="'+h+'" fill="var(--road)"/>';
+  for(var i=0;i<cols;i++)for(var j=0;j<rows;j++){var t=rnd();
+    o+='<rect x="'+(g+i*(cw+g)).toFixed(1)+'" y="'+(g+j*(ch+g)).toFixed(1)+'" width="'+cw.toFixed(1)+'" height="'+ch.toFixed(1)+'" rx="1.5" fill="'+(t>.85?"var(--goldbright)":"var(--plot)")+'" opacity="'+(t>.85?.9:(.55+t*.45)).toFixed(2)+'"/>'}
+  return '<svg viewBox="0 0 '+w+' '+h+'" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Illustrative plot layout sketch for '+esc(p.name)+'">'+o+'</svg>';
+}
+
+/* to-scale map around Vijayawada. Rings every 10 km. Places beyond the map edge sit on the rim with their distance. */
+function mapSVG(selId){
+  var W=560,H=460,cx=W/2,cy=H/2,maxKm=40,sc=(Math.min(cx,cy)-34)/maxKm,kLat=111.2,kLng=111.2*Math.cos(CENTER.lat*Math.PI/180),g="";
+  for(var k=10;k<=maxKm;k+=10){g+='<circle cx="'+cx+'" cy="'+cy+'" r="'+(k*sc).toFixed(1)+'" fill="none" stroke="var(--ring)" stroke-dasharray="3 5"/><text x="'+(cx+4)+'" y="'+(cy-k*sc-4).toFixed(1)+'">'+k+' km</text>'}
+  g+='<text x="'+(W-24)+'" y="18" text-anchor="middle">N</text><path d="M'+(W-24)+' 22l-4 10h8z" fill="var(--muted)"/>';
+  function place(lat,lng){var dx=(lng-CENTER.lng)*kLng,dy=(lat-CENTER.lat)*kLat,d=Math.sqrt(dx*dx+dy*dy),f=d>maxKm?maxKm/d:1;
+    return {x:cx+dx*f*sc,y:cy-dy*f*sc,d:d,edge:d>maxKm}}
+  Object.keys(LANDMARKS).forEach(function(key){var L=LANDMARKS[key],q=place(L.lat,L.lng);
+    if(key==="vja"){g+='<g class="lm"><rect x="'+(cx-6)+'" y="'+(cy-6)+'" width="12" height="12" fill="var(--deep)" transform="rotate(45 '+cx+' '+cy+')"/><text x="'+(cx+11)+'" y="'+(cy+15)+'" font-weight="700">Vijayawada</text></g>';return}
+    if(key==="mgl")return;
+    var a=q.x>W*.62?"end":"start",dx=a==="end"?-8:8,label=q.edge?L.name+" · "+Math.round(q.d)+" km":L.name;
+    g+='<g class="lm"><circle cx="'+q.x.toFixed(1)+'" cy="'+q.y.toFixed(1)+'" r="3.5" fill="var(--muted)"/><text x="'+(q.x+dx).toFixed(1)+'" y="'+(q.y+4).toFixed(1)+'" text-anchor="'+a+'">'+esc(label)+'</text></g>'});
+  PROJECTS.forEach(function(p){if(!p.mapped)return;var q=place(p.lat,p.lng),a=q.x>W*.62?"end":"start",dx=a==="end"?-13:13;
+    g+='<g class="pin'+(p.id===selId?' sel':'')+'" data-id="'+p.id+'" tabindex="0" role="link" aria-label="'+esc(p.name+", "+p.area)+'"><circle cx="'+q.x.toFixed(1)+'" cy="'+q.y.toFixed(1)+'" r="9"/><text x="'+(q.x+dx).toFixed(1)+'" y="'+(q.y+4).toFixed(1)+'" text-anchor="'+a+'">'+esc(p.area)+'</text></g>'});
+  return '<svg class="map" viewBox="0 0 '+W+' '+H+'" role="img" aria-label="Map of project locations around Vijayawada">'+g+'</svg>';
+}
+
+/* ---------- views ---------- */
+function cardHTML(p){
+  return '<article class="card"><div class="art" data-open="'+p.id+'">'+art(p,300,150)+'</div><div class="cb">'+
+  '<span class="eyebrow">Featured Project</span><h3>'+esc(p.name)+'</h3><div class="loc">'+esc(p.place)+'</div>'+
+  (p.tagline?'<div class="tag">'+esc(p.tagline)+'</div>':'')+
+  '<div class="pair"><div><span>Plot Information</span><b>'+esc(p.plot)+'</b></div><div><span>Price</span><b>'+inr(p.rate)+' / Sq. Yd</b></div></div>'+
+  '<div class="approved">'+esc(p.approval)+'</div>'+
+  '<div class="row"><button class="btn solid" data-open="'+p.id+'">View project</button><a class="btn" target="_blank" rel="noopener" href="'+wa("Hello, I would like to enquire about "+p.name+" at "+p.area+".")+'">Enquire now</a></div></div></article>';
+}
+function sorted(list){var l=list.slice();if(state.sort==="asc")l.sort(function(a,b){return a.rate-b.rate});if(state.sort==="desc")l.sort(function(a,b){return b.rate-a.rate});return l}
+
+function formHTML(selected){
+  var opts='<option value="">Select location</option>'+PROJECTS.map(function(p){return '<option'+(p.id===selected?' selected':'')+' value="'+esc(p.name+" – "+p.area)+'">'+esc(p.name+" – "+p.area)+'</option>'}).join("");
+  return '<form class="enq" id="enq"><label for="f-name">Full name<input id="f-name" required autocomplete="name"></label>'+
+  '<label for="f-phone">Mobile number<input id="f-phone" required inputmode="tel" autocomplete="tel"></label>'+
+  '<label for="f-loc">Preferred location<select id="f-loc">'+opts+'</select></label>'+
+  '<label for="f-budget">Budget<input id="f-budget" placeholder="e.g. 40 lakhs"></label>'+
+  '<label class="full" for="f-req">Plot requirement<input id="f-req" placeholder="e.g. 200 sq. yds, east facing"></label>'+
+  '<label class="full" for="f-msg">Message<textarea id="f-msg" rows="3"></textarea></label>'+
+  '<div class="full"><button class="btn solid" type="submit">Get property details</button><p class="fine" style="margin-top:8px">This opens WhatsApp with your details filled in. Send the message there to reach our team. Your information is used only to respond to your property enquiry.</p></div></form>';
+}
+function contactHTML(){
+  return '<div class="contact"><span class="eyebrow">Contact us</span><h3>'+esc(CO.name)+'</h3><dl>'+
+  '<div><dt>Address</dt><dd>'+esc(CO.address)+'</dd></div>'+
+  '<div><dt>Phone and WhatsApp</dt><dd><span class="num">'+CO.phone+'</span></dd></div>'+
+  '<div><dt>Email</dt><dd>'+esc(CO.email)+'</dd></div>'+
+  '<div><dt>Hours</dt><dd>'+esc(CO.hours)+'</dd></div></dl>'+
+  '<div class="row"><button class="btn ghost" id="cp">Copy number</button><a class="btn solid" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query='+encodeURIComponent("Sri Sai Developers, "+CO.address)+'">Find us on Google Maps</a></div></div>';
+}
+function footHTML(){
+  return '<footer class="foot"><div class="w"><b style="font-family:var(--display);letter-spacing:.12em">SRI SAI DEVELOPERS</b><p>Open plot opportunities around Amaravati and Vijayawada with a focus on transparent property guidance.</p><p>'+CO.phone+' · '+esc(CO.email)+' · Vijayawada, Andhra Pradesh</p><p>Plot sketches are illustrative and map distances are approximate. Buyers should independently verify property documents, approvals and applicable legal requirements before purchasing.</p><p>© 2026 Sri Sai Developers. All rights reserved.</p></div></footer>';
+}
+
+function renderHome(){
+  var regions=["All","Amaravati","Vijayawada","Vizag"];
+  var list=sorted(PROJECTS.filter(function(p){return state.region==="All"||p.region===state.region}));
+  var h='<section class="hero"><svg class="rings" viewBox="0 0 640 640" aria-hidden="true">'+[60,120,180,240,300].map(function(r){return '<circle cx="320" cy="320" r="'+r+'" fill="none" stroke="var(--goldbright)" stroke-opacity=".25"/>'}).join("")+'</svg>'+
+  '<div class="w"><span class="eyebrow">Open plots around Amaravati &amp; Vijayawada</span><h1>Invest in Land. Build Your Future.</h1><h2>Premium Open Plots in Amaravati &amp; Vijayawada</h2>'+
+  '<p class="lead">Discover carefully selected open plot opportunities designed for residential living and long-term property ownership.</p>'+
+  '<div class="cta"><button class="btn solid" data-go="sec-projects">Explore projects</button><a class="btn ghost" target="_blank" rel="noopener" href="'+wa("Hello, I would like to talk to a property expert.")+'">Talk to a property expert</a></div></div></section>'+
+  '<div class="trust"><div class="w"><span>Transparent Guidance</span><span>Property-Focused Service</span><span>Site Visit Assistance</span></div></div>';
+
+  h+='<section class="sec" id="sec-projects"><div class="w"><div class="head"><span class="eyebrow">Selected opportunities</span><h2>Explore Our Projects</h2><p>Discover selected open plot opportunities around Amaravati and Vijayawada, and in the Vizag region.</p></div>';
+  h+='<div class="tools" role="group" aria-label="Filter projects">'+regions.map(function(r){return '<button class="chip" data-region="'+r+'" aria-pressed="'+(state.region===r)+'">'+r+'</button>'}).join("")+
+  '<select id="sort" aria-label="Sort projects"><option value="default"'+(state.sort==="default"?" selected":"")+'>Sort: featured</option><option value="asc"'+(state.sort==="asc"?" selected":"")+'>Price: low to high</option><option value="desc"'+(state.sort==="desc"?" selected":"")+'>Price: high to low</option></select></div>';
+  h+='<div class="grid">'+list.map(cardHTML).join("")+'</div></div></section>';
+
+  h+='<section class="sec sand" id="sec-map"><div class="w"><div class="head"><span class="eyebrow">Where we are</span><h2>Our projects on the map</h2><p>Kaza, Neppalli and Pamarru plotted to scale around Vijayawada. Tap a pin to open the project.</p></div>'+
+  '<div class="cols"><div class="panel"><h3>Amaravati – Vijayawada region</h3><p class="loc">Rings are 10 km apart, measured from Vijayawada.</p>'+mapSVG("")+'<div class="keys"><span><i style="background:var(--goldbright)"></i>Our project</span><span><i style="background:var(--muted)"></i>Reference place</span></div></div>'+
+  '<div class="panel"><h3>Bhogapuram, Vizag region</h3><p class="loc">Outside this map, on the north coast.</p><p>ICONIC-2 at Bhogapuram sits next to the new Alluri Sitarama Raju International Airport, about 45 km from Visakhapatnam and off NH 16. Commercial flights moved there on 17 August 2026.</p><div class="row" style="display:flex;gap:8px;margin-top:14px"><button class="btn solid" data-open="iconic-2-bhogapuram">View project</button></div></div></div></div></section>';
+
+  h+='<section class="sec" id="sec-locations"><div class="w"><div class="head" style="text-align:center;justify-items:center"><span class="eyebrow">Focus locations</span><h2>Strategically Located Around Amaravati &amp; Vijayawada</h2></div><div class="two">'+
+  ['Amaravati','Vijayawada'].map(function(r){var n=PROJECTS.filter(function(p){return p.region===r}).map(function(p){return p.name+" ("+p.area+")"}).join(", ");
+    return '<div class="loccard"><span class="eyebrow">'+r+'</span><h3>'+r+'</h3><p>'+FOCUS[r]+'</p><p><b style="color:var(--fg)">Our projects:</b> '+esc(n)+'</p><button class="btn solid" data-region-go="'+r+'">Explore '+r+(r==="Amaravati"?" projects":" opportunities")+'</button></div>'}).join("")+'</div></div></section>';
+
+  h+='<section class="sec deep" id="sec-why"><div class="w why"><div class="head"><span class="eyebrow">Property education</span><h2>Why Consider Open Plot Investment?</h2><div><a class="btn solid" target="_blank" rel="noopener" href="'+wa("Hello, I would like to speak with a property consultant.")+'" style="text-transform:uppercase">Speak with a property consultant</a></div></div><div class="pts">'+
+  WHY.map(function(w){return '<div><h3>'+w[0]+'</h3><p>'+w[1]+'</p></div>'}).join("")+'</div></div></section>';
+
+  h+='<section class="sec sand" id="sec-process"><div class="w"><div class="head" style="text-align:center;justify-items:center"><span class="eyebrow">A clear path</span><h2>Your Property Buying Process</h2></div><ol class="steps">'+
+  STEPS.map(function(s,i){return '<li><span class="n">0'+(i+1)+'</span><h3>'+s[0]+'</h3><p>'+s[1]+'</p></li>'}).join("")+'</ol><div class="disc">Buyers should independently verify property documents, approvals and applicable legal requirements before purchasing.</div></div></section>';
+
+  h+='<section class="sec" id="sec-contact"><div class="w"><div class="head"><span class="eyebrow">Start your search</span><h2>Find Your Ideal Plot</h2><p>Tell us your preferred location and budget and we will help you explore suitable options.</p></div><div class="cols">'+contactHTML()+'<div class="panel">'+formHTML("")+'</div></div></div></section>'+footHTML();
+  app.innerHTML=h;
+}
+
+function renderDetail(p){
+  var h='<div class="w"><button class="btn back" id="back">← All projects</button>';
+  h+='<div class="dhead"><div class="dart">'+art(p,640,380)+'</div><div class="dtitle"><span class="eyebrow">Featured Project</span><h1>'+esc(p.name)+'</h1><div class="loc" style="font-size:16px">'+esc(p.place)+(p.district?" · "+esc(p.district):"")+'</div>'+(p.tagline?'<div class="tag" style="font-size:15px">'+esc(p.tagline)+'</div>':'')+'<p>'+esc(p.summary)+'</p><div class="approved">'+esc(p.approval)+'</div>'+
+  '<div style="display:flex;flex-wrap:wrap;gap:8px"><a class="btn solid" target="_blank" rel="noopener" href="'+wa("Hello, I would like to enquire about "+p.name+" at "+p.area+".")+'">Enquire on WhatsApp</a>'+
+  (p.mapped?'<a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query='+p.lat+','+p.lng+'">Open in Google Maps</a>':'<a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query='+encodeURIComponent("Bhogapuram, Andhra Pradesh")+'">Open Bhogapuram in Google Maps</a>')+'</div></div></div>';
+  h+='<div class="facts"><div class="fact"><span>Plot information</span><b>'+esc(p.plot)+'</b></div><div class="fact"><span>Price</span><b>'+inr(p.rate)+' / Sq. Yd</b></div><div class="fact"><span>Region</span><b>'+esc(p.region==="Vizag"?"Vizag region":p.region+" region")+'</b></div></div>';
+  h+='<section class="d"><h2>Location highlights</h2><ul class="ul">'+p.highlights.map(function(x){return '<li>'+esc(x)+'</li>'}).join("")+'</ul></section>';
+
+  h+='<section class="d"><h2>Around this location</h2><div class="cols">';
+  if(p.mapped){
+    var rows=p.near.map(function(k){var L=LANDMARKS[k];return [L.name,km(p.lat,p.lng,L.lat,L.lng)]}).sort(function(a,b){return a[1]-b[1]}),mx=Math.max.apply(null,rows.map(function(r){return r[1]}));
+    h+='<div class="panel"><h3>Distance to key places</h3><p class="loc">Straight-line distances, approximate. Road distance is longer.</p><div class="near">'+rows.map(function(r){return '<div class="nrow"><div>'+esc(r[0])+'</div><div class="km">'+Math.round(r[1])+' km</div><div class="bar"><i style="width:'+Math.max(5,r[1]/mx*100)+'%"></i></div></div>'}).join("")+'</div></div>';
+    h+='<div class="panel"><h3>Position on the map</h3><p class="loc">Among our projects, to scale.</p>'+mapSVG(p.id)+'</div>';
+  }else{
+    h+='<div class="panel"><h3>Nearby</h3><div class="near">'+p.facts.map(function(f){return '<div class="nrow"><div>'+esc(f[0])+'</div><div class="km">'+esc(f[1])+'</div></div>'}).join("")+'</div></div>';
+    h+='<div class="panel"><h3>Why the area is in focus</h3><p>The new international airport is the anchor. It was inaugurated on 1 August 2026, handles about 6 million passengers a year in phase one, and is planned to grow in phases to 18 million. A 3,800 m runway and a cargo terminal are in place.</p></div>';
+  }
+  h+='</div><p class="srcs">Location facts are compiled from public sources: '+SOURCES.map(function(s){return '<a href="'+s[1]+'" target="_blank" rel="noopener">'+esc(s[0])+'</a>'}).join(", ")+'. Please confirm current details with our team.</p></section>';
+
+  h+='<section class="d"><h2>Estimate your plot cost</h2><div class="panel"><div class="calc"><label for="yd">Plot size (Sq. Yds)<input id="yd" type="number" min="'+p.min+'" step="1" value="'+p.min+'"></label><div><span class="fine">Listed rate</span><br><b>'+inr(p.rate)+' / Sq. Yd</b></div><div><span class="fine">Indicative plot cost</span><br><output id="est" for="yd"></output></div></div><p class="fine" style="margin-top:10px">Indicative only, based on the listed rate. Final price, registration and other charges are confirmed by our team.</p></div></section>';
+
+  h+='<section class="d"><h2>Request details for '+esc(p.name)+'</h2><div class="panel">'+formHTML(p.id)+'</div></section></div>'+footHTML();
+  app.innerHTML=h;
+  var yd=document.getElementById("yd"),est=document.getElementById("est");
+  function upd(){var v=parseFloat(yd.value);est.textContent=v>0?inr(v*p.rate):"–"}
+  yd.addEventListener("input",upd);upd();
+  document.getElementById("back").addEventListener("click",function(){location.hash="home"});
+}
+
+/* ---------- routing and events ---------- */
+function bind(){
+  var cp=document.getElementById("cp");if(cp)cp.addEventListener("click",function(){copyText(CO.phone)});
+  var f=document.getElementById("enq");
+  if(f)f.addEventListener("submit",function(e){e.preventDefault();
+    var g=function(i){return document.getElementById(i).value.trim()};
+    var t="Hello, I am "+g("f-name")+" ("+g("f-phone")+")."+(g("f-loc")?" Preferred location: "+g("f-loc")+".":"")+(g("f-budget")?" Budget: "+g("f-budget")+".":"")+(g("f-req")?" Plot requirement: "+g("f-req")+".":"")+(g("f-msg")?" "+g("f-msg"):"");
+    var w=window.open(wa(t),"_blank");if(!w)toast("Tap “Chat on WhatsApp” to continue")});
+}
+function route(scrollTo){
+  var id=(location.hash||"").slice(1),p=byId(id);
+  if(p)renderDetail(p);else renderHome();
+  bind();
+  var el=scrollTo&&document.getElementById(scrollTo);
+  if(el)el.scrollIntoView({block:"start"});else window.scrollTo(0,0);
+}
+function go(sec){
+  if(byId((location.hash||"").slice(1))){pending=sec;location.hash="home";return}
+  var el=document.getElementById(sec);if(el)el.scrollIntoView({behavior:"smooth",block:"start"});
+}
+var pending=null;
+window.addEventListener("hashchange",function(){var s=pending;pending=null;route(s)});
+
+app.addEventListener("click",function(e){
+  var t=e.target.closest("[data-open]");if(t){location.hash=t.dataset.open;return}
+  t=e.target.closest(".pin");if(t){location.hash=t.dataset.id;return}
+  t=e.target.closest("[data-region]");if(t){state.region=t.dataset.region;renderHome();bind();return}
+  t=e.target.closest("[data-region-go]");if(t){state.region=t.dataset.regionGo;renderHome();bind();document.getElementById("sec-projects").scrollIntoView({block:"start"});return}
+  t=e.target.closest("[data-go]");if(t){go(t.dataset.go)}
+});
+app.addEventListener("keydown",function(e){if(e.key==="Enter"){var t=e.target.closest&&e.target.closest(".pin");if(t)location.hash=t.dataset.id}});
+app.addEventListener("change",function(e){if(e.target.id==="sort"){state.sort=e.target.value;renderHome();bind();document.getElementById("sec-projects").scrollIntoView({block:"start"})}});
+
+/* header */
+document.getElementById("callTop").href="tel:"+CO.phone;
+document.getElementById("waTop").href=wa("Hello, I would like to know more about your projects.");
+document.getElementById("waFab").href=wa("Hello, I would like to know more about your projects.");
+document.getElementById("callTop").addEventListener("click",function(){toast("Call "+CO.phone)});
+var NAV=[["Projects","sec-projects"],["Map","sec-map"],["Locations","sec-locations"],["Why open plots","sec-why"],["Process","sec-process"],["Contact","sec-contact"]];
+document.getElementById("nav").innerHTML=NAV.map(function(n){return '<button data-nav="'+n[1]+'">'+n[0]+'</button>'}).join("");
+document.getElementById("nav").addEventListener("click",function(e){var b=e.target.closest("[data-nav]");if(b)go(b.dataset.nav)});
+route();
+</script>
+
+</body></html>
